@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "754597014013",
+    "project_id": "minhasvendas-524a8",
+    "storage_bucket": "minhasvendas-524a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754597014013:android:1660f973f1f6e9c3995194",
+        "android_client_info": {
+          "package_name": "com.majorit.minhas_vendas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754597014013-p3afrlhl73sd96pi47f0q1bkutnsm9mp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApQxCFhHfpEw6RBn65BILaB280PVKBsss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754597014013-p3afrlhl73sd96pi47f0q1bkutnsm9mp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
