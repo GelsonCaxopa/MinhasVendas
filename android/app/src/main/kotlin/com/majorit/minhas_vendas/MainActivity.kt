@@ -1,4 +1,4 @@
-package com.example.minhas_vendas
+package com.majorit.minhas_vendas
 
 import io.flutter.embedding.android.FlutterActivity
 

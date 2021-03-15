@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:minhas_vendas/app/modules/ui/login_page.dart';
+
+import 'modules/login/login_page.dart';
 
 class AppWidget extends StatelessWidget {
   @override
