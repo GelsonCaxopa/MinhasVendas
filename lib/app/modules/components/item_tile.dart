@@ -13,8 +13,8 @@ class ItemTiles extends StatelessWidget {
         child: MaterialButton(
           //avatar e botão para editar Cadastro cliente
           child: CircleAvatar(
-            child: Icon(Icons.person, color: Colors.white),
-            backgroundColor: Colors.blue[900],
+            child: Icon(Icons.person, color: Colors.black),
+            backgroundColor: Colors.white,
           ),
           onPressed: () {
             Navigator.of(context).pushReplacementNamed('/infoclientes');
@@ -33,9 +33,9 @@ class ItemTiles extends StatelessWidget {
       ),
       trailing: Container(
         child: CircleAvatar(
-          backgroundColor: Colors.blue[900],
+          backgroundColor: Colors.white,
           child: IconButton(
-            icon: Icon(Icons.add_shopping_cart, color: Colors.white),
+            icon: Icon(Icons.add_shopping_cart, color: Colors.black),
             onPressed: () {},
           ),
         ),

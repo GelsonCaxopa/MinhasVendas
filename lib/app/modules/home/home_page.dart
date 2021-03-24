@@ -20,6 +20,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.highlight_off, size: 30, color: Colors.red[900]),
+          onPressed: controller.logOut,
+        ),
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Container(
@@ -33,7 +39,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                     Theme.Colors.loginGradientStart,
                     Theme.Colors.loginGradientEnd
                   ],
-                  begin: const FractionalOffset(0.0, -0.5),
+                  begin: const FractionalOffset(0.0, -0.01),
                   end: const FractionalOffset(1.0, 1.0),
                   stops: [0.0, 1.0],
                   tileMode: TileMode.clamp),
@@ -82,25 +88,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           boxShadow: <BoxShadow>[
                             BoxShadow(
-                              color: Theme.Colors.loginGradientStart,
-                              offset: Offset(1.0, 6.0),
-                              blurRadius: 20.0,
-                            ),
-                            BoxShadow(
-                              color: Theme.Colors.loginGradientEnd,
-                              offset: Offset(1.0, 6.0),
+                              color: Colors.black,
+                              offset: Offset(1.0, 1.0),
                               blurRadius: 20.0,
                             ),
                           ],
-                          gradient: new LinearGradient(
-                              colors: [
-                                Theme.Colors.loginGradientEnd,
-                                Theme.Colors.loginGradientStart
-                              ],
-                              begin: const FractionalOffset(0.2, 0.2),
-                              end: const FractionalOffset(1.0, 1.0),
-                              stops: [0.0, 1.0],
-                              tileMode: TileMode.clamp),
+                          color: Colors.orange,
                         ),
                         margin: const EdgeInsets.fromLTRB(20, 15, 20, 2),
                         child: ItemTiles(
@@ -182,6 +175,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        splashColor: Colors.orange[900],
+        backgroundColor: Colors.yellow[800],
         onPressed: () {
           _showDialog();
         },

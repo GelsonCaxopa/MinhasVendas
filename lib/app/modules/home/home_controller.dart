@@ -1,3 +1,5 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:minhas_vendas/app/modules/login/repositories/auth_controller.dart';
 import 'package:mobx/mobx.dart';
 
 import 'models/clientes_model.dart';
@@ -25,4 +27,9 @@ abstract class _HomeControllerBase with Store {
   Future save(ClientesModel model) => repository.save(model);
 
   Future delete(ClientesModel model) => repository.delete(model);
+
+  logOut() async {
+    await Modular.get<AuthController>().logOut();
+    Modular.to.pushReplacementNamed('/login');
+  }
 }

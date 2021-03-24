@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "754597014013-2g2g3vlqr2espeikmaioqqek6oibdbqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.majorit.minhas_vendas",
+            "certificate_hash": "4bfcb640f89869cf476760934e5e658dd16ac197"
+          }
+        },
+        {
           "client_id": "754597014013-p3afrlhl73sd96pi47f0q1bkutnsm9mp.apps.googleusercontent.com",
           "client_type": 3
         }
