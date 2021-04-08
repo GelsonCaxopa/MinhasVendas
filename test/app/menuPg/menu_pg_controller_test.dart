@@ -1,9 +1,9 @@
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:minhas_vendas/app/menu/menu_module.dart';
+import 'package:minhas_vendas/app/modules/home/home_module.dart';
 
 void main() {
-  initModule(MenuModule());
+  initModule(HomeModule());
   // MenuPgController menupg;
   //
   setUp(() {

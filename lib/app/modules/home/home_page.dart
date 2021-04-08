@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:minhas_vendas/app/modules/components/item_tile.dart';
-import 'package:minhas_vendas/app/modules/home/models/clientes_model.dart';
 import 'package:minhas_vendas/app/modules/style/theme.dart' as Theme;
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
-  const HomePage({Key key, this.title = "Lista de Clientes"}) : super(key: key);
+  const HomePage({Key key, this.title = "Home"}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -23,219 +20,263 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.highlight_off, size: 30, color: Colors.red[900]),
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/menuPg');
-          },
+          onPressed: controller.logOut,
         ),
       ),
       body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height >= 775.0
-                ? MediaQuery.of(context).size.height
-                : 775.0,
-            decoration: new BoxDecoration(
-              gradient: new LinearGradient(
-                  colors: [
-                    Theme.Colors.loginGradientStart,
-                    Theme.Colors.loginGradientEnd
-                  ],
-                  begin: const FractionalOffset(0.0, -0.01),
-                  end: const FractionalOffset(1.0, 1.0),
-                  stops: [0.0, 1.0],
-                  tileMode: TileMode.clamp),
-            ),
-            child: Observer(
-              builder: (_) {
-                if (controller.clientesLista.hasError) {
-                  print(controller.clientesLista.error);
-                  return Center(
-                    child: ElevatedButton(
-                      onPressed: controller.getList,
-                      child: Text('Erro'),
-                    ),
-                  );
-                }
-                if (controller.clientesLista.data == null) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-
-                List<ClientesModel> list = controller.clientesLista.data;
-
-                return ListView.builder(
-                  itemCount: list.length,
-                  itemBuilder: (_, index) {
-                    ClientesModel model = list[index];
-
-                    return Dismissible(
-                      secondaryBackground: Container(
-                        alignment: AlignmentDirectional(0.8, 0),
-                        color: Colors.red[900],
-                        child: Icon(Icons.delete_outline_rounded,
-                            color: Colors.white, size: 34),
-                      ),
-                      background: Container(
-                        alignment: AlignmentDirectional(-0.8, 0),
-                        color: Colors.blue[900],
-                        child: Icon(Icons.local_atm_rounded,
-                            color: Colors.white, size: 38),
-                      ),
-                      key: Key(model.nome),
-                      child: Container(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height >= 775.0
+              ? MediaQuery.of(context).size.height
+              : 775.0,
+          decoration: new BoxDecoration(
+            color: Theme.Colors.backGround,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 2),
+                child: new Image(
+                    width: 250.0,
+                    height: 220.0,
+                    fit: BoxFit.fill,
+                    image: new AssetImage('assets/mj.png')),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Text(
+                  "   Bem-vindo! \n Boas Vendas!",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Center(
+                  child: Wrap(
+                    children: <Widget>[
+                      Container(
                         padding: EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                           boxShadow: <BoxShadow>[
                             BoxShadow(
-                              color: Colors.black,
+                              color: Colors.yellow[900],
                               offset: Offset(1.0, 1.0),
-                              blurRadius: 20.0,
+                              blurRadius: 10,
                             ),
                           ],
-                          color: Colors.orange,
                         ),
-                        margin: const EdgeInsets.fromLTRB(20, 15, 20, 2),
-                        child: ItemTiles(
-                          model: model,
+                        child: SizedBox(
+                          width: 160.0,
+                          height: 160.0,
+                          child: Card(
+                            color: Color.fromARGB(255, 21, 21, 21),
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Center(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    //Image.asset(
+                                    //"assets/todo.png",
+                                    // width: 64.0,
+                                    //  ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Text(
+                                      "Vender",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                  ],
+                                ),
+                              )),
+                            ),
+                          ),
                         ),
                       ),
-                      confirmDismiss: (direction) async {
-                        if (direction == DismissDirection.endToStart) {
-                          final bool res = await showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  content: Text(
-                                      "Você tem certeza que gostaria de excluir o cliente ${model.nome}?"),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text(
-                                        "Cancel",
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
+                      Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.yellow[900],
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: SizedBox(
+                          width: 160.0,
+                          height: 160.0,
+                          child: Card(
+                            color: Color.fromARGB(255, 21, 21, 21),
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/home');
+                              },
+                              child: Center(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    // Image.asset(
+                                    // "assets/note.png",
+                                    //  width: 64.0,
+                                    // ),
+                                    SizedBox(
+                                      height: 10.0,
                                     ),
-                                    TextButton(
-                                      child: Text(
-                                        "Delete",
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                      onPressed: () {
-                                        controller.delete(model);
-                                        Navigator.of(context).pop();
-                                      },
+                                    Text(
+                                      "Clientes",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0),
                                     ),
-                                  ],
-                                );
-                              });
-                          return res;
-                        } else {
-                          final bool res1 = await showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  content: Text(
-                                      "Gostaria de Zerar a conta do Cliente ${model.nome}?"),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text(
-                                        "Cancel",
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                    Checkbox(
-                                      checkColor: Colors.blue[900],
-                                      value: model.pago,
-                                      onChanged: (pago) {
-                                        model.pago = pago;
-
-                                        controller.save(model);
-
-                                        Modular.to.pop();
-                                      },
+                                    SizedBox(
+                                      height: 5.0,
                                     ),
                                   ],
-                                );
-                              });
-                          return res1;
-                        }
-                      },
-                    );
-                  },
-                );
-              },
-            ),
+                                ),
+                              )),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.yellow[900],
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: SizedBox(
+                          width: 160.0,
+                          height: 160.0,
+                          child: Card(
+                            color: Color.fromARGB(255, 21, 21, 21),
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/produtos');
+                              },
+                              child: Center(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    //Image.asset(
+                                    // "assets/calendar.png",
+                                    // width: 64.0,
+                                    // ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Text(
+                                      "Produtos",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                  ],
+                                ),
+                              )),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.yellow[900],
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: SizedBox(
+                          width: 160.0,
+                          height: 160.0,
+                          child: Card(
+                            color: Color.fromARGB(255, 21, 21, 21),
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Center(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    //Image.asset(
+                                    //  "assets/settings.png",
+                                    //   width: 64.0,
+                                    //  ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Text(
+                                      " Relatorio \nde Vendas",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                  ],
+                                ),
+                              )),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        splashColor: Colors.orange[900],
-        backgroundColor: Colors.yellow[800],
-        onPressed: () {
-          _showDialog();
-        },
-        child: Icon(Icons.add_circle_rounded, size: 30),
-      ),
-    );
-  }
-
-  _showDialog([ClientesModel model]) {
-    model ??= ClientesModel();
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Cadastrar novo cliente'),
-          content: Form(
-              child: Container(
-            height: MediaQuery.of(context).size.height / 3.8,
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Nome',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onChanged: (value) => model.nome = value,
-                ),
-                SizedBox(height: 20),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Telefone',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onChanged: (value) => model.telefone = value,
-                ),
-              ],
-            ),
-          )),
-          actions: [
-            TextButton(
-              onPressed: () => Modular.to.pop(),
-              child: Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () async {
-                await controller.save(model);
-                Modular.to.pop();
-              },
-              child: Text('Salvar'),
-            ),
-          ],
-        );
-      },
     );
   }
 }
