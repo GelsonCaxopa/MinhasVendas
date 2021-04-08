@@ -73,17 +73,18 @@ flutter:
 
 
   fonts:
-    - family: WorkSansSemiBold
+    - family: Piazzolla
       fonts:
-        - asset: assets/fonts/Work_Sans/WorkSans-SemiBold.ttf
+        - asset: assets/fonts/Piazzolla/Piazzolla-ExtraBold.ttf
+          weight: 600
 
-    - family: WorkSansBold
+    - family: Piazzolla
       fonts:
-        - asset: assets/fonts/Work_Sans/WorkSans-Bold.ttf
+        - asset: assets/fonts/Piazzolla/Piazzolla-Italic.ttf
 
-    - family: WorkSansMedium
+    - family: Piazzolla
       fonts:
-        - asset: assets/fonts/Work_Sans/WorkSans-Medium.ttf
+        - asset: assets/fonts/Piazzolla/Piazzolla-Light.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
