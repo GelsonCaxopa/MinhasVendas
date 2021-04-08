@@ -1,9 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:minhas_vendas/app/app_widget.dart';
-
 import 'app_controller.dart';
-import 'modules/clients/clients_controller.dart';
 import 'modules/clients/clients_module.dart';
 import 'modules/home/home_controller.dart';
 import 'modules/home/home_module.dart';
@@ -21,7 +19,6 @@ class AppModule extends MainModule {
         Bind<IAuthRepository>((i) => AuthRepository()),
         Bind((i) => AuthController()),
         Bind((i) => HomeController()),
-        Bind((i) => ClientsController),
       ];
 
   @override
@@ -30,7 +27,7 @@ class AppModule extends MainModule {
         ModularRouter('/login', module: LoginModule()),
         ModularRouter('/home', module: HomeModule()),
         ModularRouter('/produtos', module: ProdutosModule()),
-        ModularRouter('/clients', module: ClientsModule()),
+        ModularRouter('/clients', module: ClientesModule()),
       ];
 
   @override

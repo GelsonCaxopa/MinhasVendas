@@ -133,7 +133,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                             child: TextButton(
                               onPressed: () {
                                 Navigator.of(context)
-                                    .pushReplacementNamed('/home');
+                                    .pushReplacementNamed('/clients');
                               },
                               child: Center(
                                   child: Padding(

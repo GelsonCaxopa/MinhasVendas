@@ -27,7 +27,7 @@ class _ClientsPageState extends ModularState<ClientsPage, ClientsController> {
           icon: Icon(Icons.arrow_back_ios_rounded,
               size: 30, color: Colors.red[900]),
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/menuPg');
+            Navigator.of(context).pushReplacementNamed('/home');
           },
         ),
       ),
