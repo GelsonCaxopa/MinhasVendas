@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
       } else {
         // user already logged in ==> Home Screen
 
-        Navigator.of(context).pushReplacementNamed('/menuPg');
+        Navigator.of(context).pushReplacementNamed('/home');
       }
     });
   }

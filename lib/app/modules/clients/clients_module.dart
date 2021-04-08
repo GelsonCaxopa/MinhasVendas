@@ -3,7 +3,7 @@ import 'package:minhas_vendas/app/modules/Clients/Clients_page.dart';
 import 'package:minhas_vendas/app/modules/clients/repositories/clients_repository_firebase.dart';
 import 'package:minhas_vendas/app/modules/clients/repositories/clients_repository_interf_firebase.dart';
 
-import 'Clients_controller.dart';
+import 'clients_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ClientsModule extends ChildModule {
