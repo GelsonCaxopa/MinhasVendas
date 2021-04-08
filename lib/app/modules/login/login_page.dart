@@ -324,7 +324,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).restorablePushReplacementNamed('/');
+                    Navigator.of(context)
+                        .restorablePushReplacementNamed('/menuPg');
                   },
                 ),
               ),

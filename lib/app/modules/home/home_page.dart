@@ -23,7 +23,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.highlight_off, size: 30, color: Colors.red[900]),
-          onPressed: controller.logOut,
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed('/menuPg');
+          },
         ),
       ),
       body: Center(
